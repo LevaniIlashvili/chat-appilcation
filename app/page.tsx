@@ -1,3 +1,16 @@
-export default function Home() {
-  return <div>Home Page</div>;
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const session = await getServerSession();
+
+  if (!session) {
+    redirect("/login");
+  }
+
+  if (session.user) {
+    redirect("/dashboard");
+  } else {
+    redirect("/login");
+  }
 }
