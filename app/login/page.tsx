@@ -12,7 +12,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex flex-col gap-10 justify-center items-center h-screen">
+    <main className="flex flex-col gap-10 justify-center items-center h-screen">
       <Image
         src="./message-logo.svg"
         alt="message-logo"
@@ -32,7 +32,7 @@ const LoginPage = () => {
           Sign In
         </Button>
       </div>
-    </div>
+    </main>
   );
 };
 
