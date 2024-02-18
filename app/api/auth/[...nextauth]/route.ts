@@ -10,7 +10,7 @@ if (!GOOGLE_CLIENT_ID || !GOOGLE_CLIENT_SECRET) {
   throw new Error("Missing environment variables for Google OAuth");
 }
 
-const authOptions = {
+export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: GOOGLE_CLIENT_ID,
