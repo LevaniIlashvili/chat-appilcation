@@ -1,8 +1,8 @@
 "use server";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/authOptions";
 import { Friendship } from "@/models/friendship";
 import { User } from "@/models/user";
-import { Session, getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import { z } from "zod";
 
 const createFriendRequestSchema = z.object({
