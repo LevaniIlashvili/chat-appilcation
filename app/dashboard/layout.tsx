@@ -6,13 +6,15 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <main className="w-full h-screen flex">
       <aside className="w-80 border py-4  px-6">
-        <Image
-          src="/message-logo.svg"
-          alt="message logo"
-          width={50}
-          height={50}
-          className="mb-10"
-        />
+        <Link href="/dashboard">
+          <Image
+            src="/message-logo.svg"
+            alt="message logo"
+            width={50}
+            height={50}
+            className="mb-10"
+          />
+        </Link>
         <div className="flex flex-col gap-4">
           <p className="text-sm font-medium text-gray-400">overview</p>
           <Button
