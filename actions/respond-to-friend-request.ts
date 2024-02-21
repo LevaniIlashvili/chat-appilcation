@@ -1,5 +1,6 @@
 "use server";
 import { authOptions } from "@/authOptions";
+import { Chat } from "@/models/chat";
 import { Friendship } from "@/models/friendship";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
@@ -16,6 +17,10 @@ export async function respondToFriendRequest(
         { user1: userId, user2: session.user.id },
         { status: "accepted" }
       );
+      await Chat.create({
+        users: [userId, session.user.id],
+        messages: [],
+      });
     } else {
       await Friendship.findOneAndDelete({
         user1: userId,
