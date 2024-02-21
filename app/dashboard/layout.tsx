@@ -14,7 +14,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
   const friendships = await fetchFriendships(session.user.id);
 
   return (
-    <main className="w-full h-screen flex">
+    <main className="max-w-screen h-[94vh] flex">
       <aside className="w-80 border py-4  px-6">
         <Link href="/dashboard">
           <Image
@@ -30,12 +30,19 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             <p className="text-sm font-medium text-gray-400 mb-4">Your Chats</p>
             <ul>
               {friendships.map((friendship) => {
+                const friend =
+                  friendship.user1.id === session.user.id
+                    ? friendship.user2
+                    : friendship.user1;
                 return (
                   <li key={friendship.id}>
-                    <Button variant="light" className="text-md font-medium">
-                      {friendship.user1.id === session.user.id
-                        ? friendship.user2.username
-                        : friendship.user1.username}
+                    <Button
+                      as={Link}
+                      href={`/dashboard/chat/${friend.id}`}
+                      variant="light"
+                      className="text-md font-medium"
+                    >
+                      {friend.username}
                     </Button>
                   </li>
                 );
