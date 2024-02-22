@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 const Layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await getServerSession(authOptions);
 
-  // if (!session) redirect("/login");
+  if (!session) redirect("/login");
 
   const friendships = await fetchFriendships(session.user.id);
 
