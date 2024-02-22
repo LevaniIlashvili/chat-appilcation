@@ -103,5 +103,6 @@ export async function sendFriendRequest(
 
   return {
     errors: {},
+    success: true,
   };
 }
