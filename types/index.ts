@@ -19,3 +19,10 @@ export interface Message {
   text: string;
   date: Date;
 }
+
+export interface Friendship {
+  _id: ObjectId | string;
+  user1: User;
+  user2: User;
+  status: "pending" | "accepted";
+}
