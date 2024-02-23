@@ -7,6 +7,8 @@ export async function sendMessage(
   senderId: string,
   message: string
 ) {
+  if (!message) return;
+
   try {
     await Chat.findByIdAndUpdate(chatId, {
       $push: {
