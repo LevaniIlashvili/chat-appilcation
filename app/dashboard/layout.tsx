@@ -1,5 +1,7 @@
 import { authOptions } from "@/authOptions";
+import SidebarChats from "@/components/sidebar-chats";
 import { fetchFriendships } from "@/db/queries/friendship";
+import { Friendship } from "@/types";
 import { Button } from "@nextui-org/react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
@@ -11,7 +13,9 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
 
   if (!session) redirect("/login");
 
-  const friendships = await fetchFriendships(session.user.id);
+  const friendships = (await fetchFriendships(session.user.id)) as Friendship[];
+
+  const serializedFriendships = JSON.parse(JSON.stringify(friendships));
 
   return (
     <main className="max-w-screen h-[94vh] flex">
@@ -25,31 +29,10 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             className="mb-10"
           />
         </Link>
-        {friendships.length ? (
-          <div className="mb-4 font-medium">
-            <p className="text-sm font-medium text-gray-400 mb-4">Your Chats</p>
-            <ul>
-              {friendships.map((friendship) => {
-                const friend =
-                  friendship.user1.id === session.user.id
-                    ? friendship.user2
-                    : friendship.user1;
-                return (
-                  <li key={friendship.id}>
-                    <Button
-                      as={Link}
-                      href={`/dashboard/chat/${friend.id}`}
-                      variant="light"
-                      className="text-md font-medium"
-                    >
-                      {friend.username}
-                    </Button>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-        ) : null}
+        <SidebarChats
+          initialFriendships={serializedFriendships}
+          sessionUserId={session.user.id}
+        />
         <div className="flex flex-col gap-4">
           <p className="text-sm font-medium text-gray-400">overview</p>
           <Button
