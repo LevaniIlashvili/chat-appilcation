@@ -2,12 +2,42 @@
 import { Button, Input } from "@nextui-org/react";
 import * as actions from "@/actions";
 import { useFormState } from "react-dom";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
+import { useSession } from "next-auth/react";
 
 const AddFriendPage = () => {
+  const session = useSession();
+
   const [formState, action] = useFormState(actions.sendFriendRequest, {
     errors: {},
     success: false,
+    receiverUserId: null,
   });
+  const [socket, setSocket] = useState<any>(null);
+
+  useEffect(() => {
+    if (formState.success) {
+      socket.emit("send_friend_request", {
+        user1: {
+          _id: session.data?.user.id,
+          username: session.data?.user.name,
+        },
+        user2: {
+          _id: formState.receiverUserId,
+        },
+      });
+    }
+  }, [formState]);
+
+  useEffect(() => {
+    const socket = io("http://localhost:3001");
+    setSocket(socket);
+
+    return () => {
+      socket.close();
+    };
+  }, []);
 
   return (
     <main className="pt-32 pl-14">
