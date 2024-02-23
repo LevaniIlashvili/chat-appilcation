@@ -21,7 +21,6 @@ export async function sendFriendRequest(
   formState: CreateFriendRequestFormState,
   formData: FormData
 ) {
-  console.log("form data" + formData);
   const result = createFriendRequestSchema.safeParse({
     email: formData.get("email"),
   });
@@ -104,5 +103,6 @@ export async function sendFriendRequest(
   return {
     errors: {},
     success: true,
+    receiverUserId: user.id,
   };
 }
