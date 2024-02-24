@@ -45,7 +45,7 @@ const FriendRequests = ({
   };
 
   useEffect(() => {
-    const socket = io("http://localhost:3001", {
+    const socket = io(`https://chat-application-server-i5mv.onrender.com`, {
       query: { sessionId: sessionUser.id },
     });
     setSocket(socket);

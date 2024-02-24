@@ -41,7 +41,7 @@ const Messages = ({
   };
 
   useEffect(() => {
-    const socket = io("http://localhost:3001");
+    const socket = io(`https://chat-application-server-i5mv.onrender.com`);
     setSocket(socket);
 
     socket.emit("join_room", chat._id.toString());

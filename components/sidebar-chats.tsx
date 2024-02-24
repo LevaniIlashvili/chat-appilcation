@@ -15,7 +15,7 @@ const SidebarChats = ({
   const [friendships, setFriendships] = useState(initialFriendships);
 
   useEffect(() => {
-    const socket = io("http://localhost:3001", {
+    const socket = io(`https://chat-application-server-i5mv.onrender.com`, {
       query: { sessionId: sessionUserId },
     });
 
