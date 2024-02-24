@@ -7,7 +7,7 @@ export default async function Home() {
 
   console.log(session);
 
-  if (session.user) {
+  if (session?.user) {
     redirect("/dashboard");
   } else {
     redirect("/login");
