@@ -5,11 +5,14 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 const LoginPage = () => {
-  // const session = useSession();
+  console.log("getting session in login page");
+  const session = useSession();
 
-  // if (session.data) {
-  //   redirect("/dashboard");
-  // }
+  console.log("session in login page", session);
+
+  if (session.data) {
+    redirect("/dashboard");
+  }
 
   return (
     <main className="flex flex-col gap-10 justify-center items-center h-screen">
