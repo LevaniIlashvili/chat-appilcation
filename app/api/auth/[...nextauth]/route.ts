@@ -1,5 +1,5 @@
 // import { authOptions } from "@/authOptions";
-import NextAuth from "next-auth/next";
+import NextAuth from "next-auth";
 import { User } from "@/models/user";
 import { connectToDb } from "@/utils/db";
 import GoogleProvider from "next-auth/providers/google";
