@@ -2,9 +2,15 @@
 import { NextUIProvider } from "@nextui-org/react";
 import { SessionProvider } from "next-auth/react";
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({
+  children,
+  session,
+}: {
+  children: React.ReactNode;
+  session: any;
+}) {
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <NextUIProvider>{children}</NextUIProvider>
     </SessionProvider>
   );
